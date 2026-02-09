@@ -1,10 +1,13 @@
 package site.mybatis.domains;
 
+import com.mybatisflex.annotation.Column;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import site.commons.defines.status.DeleteStatus;
 import site.commons.defines.status.EnableStatus;
+import site.mybatis.handler.DeleteStatusHandler;
+import site.mybatis.handler.EnableStatusHandler;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -24,62 +27,75 @@ public abstract class CommonColumns implements Serializable {
   /**
    * 数据标识
    */
+  @Column(value = "string_serial")
   private String stringSerial;
 
   /**
    * 上级编号
    */
+  @Column(value = "extend_serial")
   private Long extendSerial;
-
 
   /**
    * 继承路径
    */
+  @Column(value = "extend_tracks")
   private String extendTracks;
+
   /**
    * 租户编号
    */
+  @Column(value = "tenant_serial")
   private Long tenantSerial;
 
   /**
    * 可用状态
    */
-  private Integer enableStatus;
+  @Column(value = "enable_status", typeHandler = EnableStatusHandler.class)
+  private EnableStatus enableStatus;
 
   /**
    * 删除状态
    */
-  private Integer deleteStatus;
+  @Column(value = "delete_status", typeHandler = DeleteStatusHandler.class)
+  private DeleteStatus deleteStatus;
 
   /**
    * 创建人名
    */
+  @Column(value = "create_naming")
   private String createNaming;
 
   /**
    * 创建时间
    */
+  @Column(value = "create_timing")
   private Date createTiming;
 
   /**
    * 更新人名
    */
+  @Column(value = "update_naming")
   private String updateNaming;
 
   /**
    * 更新时间
    */
+  @Column(value = "update_timing")
   private Date updateTiming;
 
   /**
    * 更新次数
    */
+  @Column(value = "locked_counts")
   private Integer lockedCounts;
 
   /**
    * 数据版本
    */
+  @Column(value = "edited_serial")
   private String editedSerial;
+
 
   public void resetStringSerial() {
     this.setStringSerial(UUID.randomUUID().toString().substring(0, 8));
@@ -107,10 +123,10 @@ public abstract class CommonColumns implements Serializable {
       this.setTenantSerial(0L);
     }
     if (Objects.isNull(this.getEnableStatus())) {
-      this.setEnableStatus(EnableStatus.ENABLED.getFlag());
+      this.setEnableStatus(EnableStatus.ENABLED);
     }
     if (Objects.isNull(this.getDeleteStatus())) {
-      this.setDeleteStatus(DeleteStatus.ENABLED.getFlag());
+      this.setDeleteStatus(DeleteStatus.ENABLED);
     }
     if (Objects.isNull(this.getCreateNaming())) {
       this.setCreateNaming("sys_auto");

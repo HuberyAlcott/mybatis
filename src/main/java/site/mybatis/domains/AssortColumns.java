@@ -1,5 +1,6 @@
 package site.mybatis.domains;
 
+import com.mybatisflex.annotation.Column;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -19,6 +20,7 @@ public abstract class AssortColumns extends CommonColumns
   /**
    * 排序编号
    */
+  @Column(value = "sorted_number")
   private Integer sortedNumber;
 
   /**
