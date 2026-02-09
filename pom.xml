@@ -43,6 +43,12 @@
       <version>${mybatis-flex.version}</version>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>com.mybatis-flex</groupId>
+      <artifactId>mybatis-flex-annotation</artifactId>
+      <version>${mybatis-flex.version}</version>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
 
   <build>
