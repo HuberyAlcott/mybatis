@@ -1,6 +1,12 @@
 package site.mybatis.domains;
 
 import com.mybatisflex.annotation.Column;
+import java.io.Serializable;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.Objects;
+import java.util.UUID;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -9,109 +15,73 @@ import site.commons.defines.status.EnableStatus;
 import site.mybatis.handler.DeleteStatusHandler;
 import site.mybatis.handler.EnableStatusHandler;
 
-import java.io.Serializable;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.Objects;
-import java.util.UUID;
-
-/**
- * 默认字段类
- */
+/** 默认字段类 */
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode
 public abstract class CommonColumns implements Serializable {
 
-  /**
-   * 数据标识
-   */
-  @Column(value = "string_serial")
-  private String stringSerial;
+  /** 数据标识 */
+  @Column(value = "unique_serial")
+  private String uniqueSerial;
 
-  /**
-   * 上级编号
-   */
+  /** 上级编号 */
   @Column(value = "extend_serial")
   private Long extendSerial;
 
-  /**
-   * 继承路径
-   */
+  /** 继承路径 */
   @Column(value = "extend_tracks")
   private String extendTracks;
 
-  /**
-   * 租户编号
-   */
+  /** 租户编号 */
   @Column(value = "tenant_serial")
   private Long tenantSerial;
 
-  /**
-   * 可用状态
-   */
+  /** 可用状态 */
   @Column(value = "enable_status", typeHandler = EnableStatusHandler.class)
   private EnableStatus enableStatus;
 
-  /**
-   * 删除状态
-   */
+  /** 删除状态 */
   @Column(value = "delete_status", typeHandler = DeleteStatusHandler.class)
   private DeleteStatus deleteStatus;
 
-  /**
-   * 创建人名
-   */
+  /** 创建人名 */
   @Column(value = "create_naming")
   private String createNaming;
 
-  /**
-   * 创建时间
-   */
+  /** 创建时间 */
   @Column(value = "create_timing")
   private Date createTiming;
 
-  /**
-   * 更新人名
-   */
+  /** 更新人名 */
   @Column(value = "update_naming")
   private String updateNaming;
 
-  /**
-   * 更新时间
-   */
+  /** 更新时间 */
   @Column(value = "update_timing")
   private Date updateTiming;
 
-  /**
-   * 更新次数
-   */
+  /** 更新次数 */
   @Column(value = "locked_counts")
   private Integer lockedCounts;
 
-  /**
-   * 数据版本
-   */
+  /** 数据版本 */
   @Column(value = "edited_serial")
   private String editedSerial;
 
-
   public void resetStringSerial() {
-    this.setStringSerial(UUID.randomUUID().toString().substring(0, 8));
+    this.setUniqueSerial(UUID.randomUUID().toString().substring(0, 8));
   }
 
   public void resetStringSerial(String serial) {
-    this.setStringSerial(serial);
+    this.setUniqueSerial(serial);
   }
 
-  /**
-   * 创建之前
-   */
+  /** 创建之前 */
   public void beforeCreate() {
     final Timestamp time = Timestamp.valueOf(LocalDateTime.now());
-    if (Objects.isNull(this.getStringSerial())) {
-      this.setStringSerial(UUID.randomUUID().toString().substring(0, 8));
+    if (Objects.isNull(this.getUniqueSerial())) {
+      this.setUniqueSerial(UUID.randomUUID().toString().substring(0, 8));
     }
     if (Objects.isNull(this.getExtendSerial())) {
       this.setExtendSerial(0L);
@@ -148,9 +118,7 @@ public abstract class CommonColumns implements Serializable {
     }
   }
 
-  /**
-   * 更新之前
-   */
+  /** 更新之前 */
   public void beforeUpdate() {
     if (Objects.isNull(this.getUpdateTiming())) {
       this.setUpdateTiming(Timestamp.valueOf(LocalDateTime.now()));

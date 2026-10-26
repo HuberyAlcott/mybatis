@@ -1,16 +1,13 @@
 package site.mybatis.handler;
 
-import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.type.BaseTypeHandler;
-import org.apache.ibatis.type.JdbcType;
-import site.commons.defines.status.VerifyStatus;
-
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import org.apache.ibatis.type.BaseTypeHandler;
+import org.apache.ibatis.type.JdbcType;
+import site.commons.defines.status.VerifyStatus;
 
-@Slf4j
 public class VerifyStatusHandler extends BaseTypeHandler<VerifyStatus> {
 
   @Override

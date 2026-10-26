@@ -4,7 +4,7 @@
 
   <groupId>site</groupId>
   <artifactId>mybatis</artifactId>
-  <version>1.0</version>
+  <version>flex-1.0</version>
   <packaging>jar</packaging>
 
   <name>mybatis</name>
@@ -14,7 +14,7 @@
     <java.version>8</java.version>
     <file.encoding>UTF-8</file.encoding>
     <jackson.version>2.13.2.2</jackson.version>
-    <lombok.version>1.18.24</lombok.version>
+    <lombok.version>1.18.20</lombok.version>
     <spring.version>5.3.19</spring.version>
     <mybatis-flex.version>1.10.6</mybatis-flex.version>
   </properties>
@@ -35,6 +35,12 @@
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <version>${lombok.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-core</artifactId>
+      <version>1.5.32</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
