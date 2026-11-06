@@ -33,6 +33,10 @@ public abstract class CommonColumns implements Serializable {
   @Column(value = "extend_tracks")
   private String extendTracks;
 
+  /** 层级序号 */
+  @Column(value = "extend_storey")
+  private String extendStorey;
+
   /** 租户编号 */
   @Column(value = "tenant_serial")
   private Long tenantSerial;
