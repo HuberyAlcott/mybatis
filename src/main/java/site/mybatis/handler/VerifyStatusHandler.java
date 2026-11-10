@@ -6,12 +6,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
-import site.commons.defines.status.VerifyStatus;
+import site.mybatis.defines.VerifyStatus;
 
 public class VerifyStatusHandler extends BaseTypeHandler<VerifyStatus> {
 
   @Override
-  public void setNonNullParameter(PreparedStatement ps, int i, VerifyStatus ev, JdbcType jt) throws SQLException {
+  public void setNonNullParameter(PreparedStatement ps, int i, VerifyStatus ev, JdbcType jt)
+      throws SQLException {
     ps.setInt(i, ev.getFlag());
   }
 

@@ -11,7 +11,7 @@
   <url>https://github.com/HuberyAlcott/mybatis.git</url>
 
   <properties>
-    <java.version>8</java.version>
+    <java.version>11</java.version>
     <file.encoding>UTF-8</file.encoding>
     <jackson.version>2.13.2.2</jackson.version>
     <lombok.version>1.18.20</lombok.version>
@@ -58,7 +58,7 @@
   </dependencies>
 
   <build>
-    <finalName>mappers</finalName>
+    <finalName>mybatis</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

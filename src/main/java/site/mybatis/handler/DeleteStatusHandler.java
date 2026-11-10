@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
-import site.commons.defines.status.DeleteStatus;
+import site.mybatis.defines.DeleteStatus;
 
 public class DeleteStatusHandler extends BaseTypeHandler<DeleteStatus> {
 

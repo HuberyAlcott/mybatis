@@ -4,7 +4,6 @@ import com.mybatisflex.annotation.Column;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
 import lombok.Data;
@@ -35,7 +34,7 @@ public abstract class CommonColumns implements Serializable {
 
   /** 层级序号 */
   @Column(value = "extend_storey")
-  private String extendStorey;
+  private Integer extendStorey;
 
   /** 租户编号 */
   @Column(value = "tenant_serial")
@@ -55,7 +54,7 @@ public abstract class CommonColumns implements Serializable {
 
   /** 创建时间 */
   @Column(value = "create_timing")
-  private Date createTiming;
+  private Long createTiming;
 
   /** 更新人名 */
   @Column(value = "update_naming")
@@ -63,7 +62,7 @@ public abstract class CommonColumns implements Serializable {
 
   /** 更新时间 */
   @Column(value = "update_timing")
-  private Date updateTiming;
+  private Long updateTiming;
 
   /** 更新次数 */
   @Column(value = "locked_counts")
@@ -109,10 +108,10 @@ public abstract class CommonColumns implements Serializable {
       this.setUpdateNaming("sys_auto");
     }
     if (Objects.isNull(this.getCreateTiming())) {
-      this.setCreateTiming(time);
+      this.setCreateTiming(time.getTime());
     }
     if (Objects.isNull(this.getUpdateTiming())) {
-      this.setUpdateTiming(time);
+      this.setUpdateTiming(time.getTime());
     }
     if (Objects.isNull(this.getLockedCounts())) {
       this.setLockedCounts(0);
@@ -125,7 +124,7 @@ public abstract class CommonColumns implements Serializable {
   /** 更新之前 */
   public void beforeUpdate() {
     if (Objects.isNull(this.getUpdateTiming())) {
-      this.setUpdateTiming(Timestamp.valueOf(LocalDateTime.now()));
+      this.setUpdateTiming(System.currentTimeMillis());
     }
     final Integer counts = this.getLockedCounts();
     this.setLockedCounts(Objects.isNull(counts) ? 1 : counts + 1);
