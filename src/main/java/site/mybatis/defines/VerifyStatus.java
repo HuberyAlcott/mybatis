@@ -2,15 +2,15 @@ package site.mybatis.defines;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.mybatisflex.annotation.EnumValue;
 import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import site.commons.defines.GeneralValuing;
 
 /** 审核状态 */
 @Getter
 @AllArgsConstructor
-public enum VerifyStatus implements GeneralValuing<VerifyStatus> {
+public enum VerifyStatus {
   invalid(0, "无效的"),
   applied(10, "已申请"),
   waiting(20, "处理中"),
@@ -18,7 +18,7 @@ public enum VerifyStatus implements GeneralValuing<VerifyStatus> {
   rejected(60, "已拒绝"),
   ;
 
-  @JsonValue private final Integer flag;
+  @JsonValue @EnumValue private final Integer flag;
 
   private final String desc;
 
@@ -30,10 +30,5 @@ public enum VerifyStatus implements GeneralValuing<VerifyStatus> {
       }
     }
     return invalid;
-  }
-
-  @Override
-  public VerifyStatus getEnum(Integer flag) {
-    return typeof(flag);
   }
 }

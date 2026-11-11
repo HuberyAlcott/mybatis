@@ -2,10 +2,10 @@ package site.mybatis.defines;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.mybatisflex.annotation.EnumValue;
 import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import site.commons.defines.GeneralValuing;
 
 /**
  * 删除状态
@@ -14,7 +14,7 @@ import site.commons.defines.GeneralValuing;
  */
 @Getter
 @AllArgsConstructor
-public enum DeleteStatus implements GeneralValuing<DeleteStatus> {
+public enum DeleteStatus {
 
   /* 未知状态 */
   UNKNOWN(0, "status.domains.delete.unknown"),
@@ -23,7 +23,7 @@ public enum DeleteStatus implements GeneralValuing<DeleteStatus> {
   /* 当前已删除 */
   DELETED(2, "status.domains.delete.deleted"),
   ;
-  @JsonValue private final Integer flag;
+  @JsonValue @EnumValue private final Integer flag;
   private final String desc;
 
   @JsonCreator
@@ -34,10 +34,5 @@ public enum DeleteStatus implements GeneralValuing<DeleteStatus> {
       }
     }
     return UNKNOWN;
-  }
-
-  @Override
-  public DeleteStatus getEnum(Integer flag) {
-    return typeof(flag);
   }
 }

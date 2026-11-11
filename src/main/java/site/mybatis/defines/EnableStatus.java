@@ -2,9 +2,9 @@ package site.mybatis.defines;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.mybatisflex.annotation.EnumValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import site.commons.defines.GeneralValuing;
 
 /**
  * 可用状态
@@ -13,7 +13,7 @@ import site.commons.defines.GeneralValuing;
  */
 @Getter
 @AllArgsConstructor
-public enum EnableStatus implements GeneralValuing<EnableStatus> {
+public enum EnableStatus {
 
   /* 未知状态 */
   UNKNOWN(0, "status.domains.enable.unknown"),
@@ -23,7 +23,7 @@ public enum EnableStatus implements GeneralValuing<EnableStatus> {
   DISABLE(2, "status.domains.enable.disable"),
   ;
 
-  @JsonValue private final Integer flag;
+  @JsonValue @EnumValue private final Integer flag;
   private final String desc;
 
   @JsonCreator
@@ -34,10 +34,5 @@ public enum EnableStatus implements GeneralValuing<EnableStatus> {
       }
     }
     return UNKNOWN;
-  }
-
-  @Override
-  public EnableStatus getEnum(Integer flag) {
-    return typeof(flag);
   }
 }
